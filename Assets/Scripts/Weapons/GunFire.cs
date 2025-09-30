@@ -5,34 +5,56 @@ using UnityEngine.InputSystem;
 
 public class GunFire : MonoBehaviour
 {
+    public int gunDamage = 25;
+    public float fireRate = 0.15f;
+    public Transform gunEnd;
+
+
+    private Camera fpsCam;
+    private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);
+    private AudioSource gunFire;
+    private LineRenderer laserLine;
+    private float nextFire;
+
     InputAction attackAction;
-    [SerializeField] AudioSource gunFire;
-    [SerializeField] GameObject assaultRifle;
-    [SerializeField] bool canFire = true;
 
     private void Start()
     {
         attackAction = InputSystem.actions.FindAction("Attack");
+
+        laserLine = GetComponent<LineRenderer>();
+        gunFire = GetComponent<AudioSource>();
+        fpsCam = GetComponentInParent<Camera>();
     }
 
     void Update()
     {
-        if(attackAction.IsPressed())
+        if(attackAction.IsPressed() && Time.time > nextFire)
         {
-            if (canFire == true)
+            nextFire = Time.time + fireRate;
+
+            StartCoroutine(ShotEffect());
+
+            Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+
+            laserLine.SetPosition(0, gunEnd.position);
+            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit))
             {
-                canFire = false;
-                StartCoroutine(firingGun());
+                laserLine.SetPosition(1, hit.point);
+            }
+            else
+            {
+                laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * 100));
             }
         }
     }
 
-    IEnumerator firingGun()
+    IEnumerator ShotEffect()
     {
         gunFire.Play();
-        assaultRifle.GetComponent<Animator>().Play("AssaultRifleFire");
-        yield return new WaitForSeconds(0.15f);
-        assaultRifle.GetComponent<Animator>().Play("New State");
-        canFire = true;
+        laserLine.enabled = true;
+        yield return shotDuration;
+        laserLine.enabled = false;
     }
 }
