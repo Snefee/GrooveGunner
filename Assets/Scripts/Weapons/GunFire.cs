@@ -43,11 +43,19 @@ public class GunFire : MonoBehaviour
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
             {
                 laserLine.SetPosition(1, hit.point);
-                EnemyHitDetection health = hit.collider.GetComponentInParent<EnemyHitDetection>();
 
-                if (health != null)
+                EnemyHitDetectionHeadshot headshot = hit.collider.GetComponent<EnemyHitDetectionHeadshot>();
+                if (headshot != null)
                 {
-                    health.Damage(gunDamage);
+                    headshot.Headshot();
+                }
+                else
+                {
+                    EnemyHitDetection health = hit.collider.GetComponentInParent<EnemyHitDetection>();
+                    if (health != null)
+                    {
+                        health.Damage(gunDamage);
+                    }
                 }
             }
             else
