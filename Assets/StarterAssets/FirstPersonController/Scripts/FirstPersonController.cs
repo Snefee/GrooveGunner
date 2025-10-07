@@ -72,7 +72,8 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
-		private const float _threshold = 0.01f;
+        //Changed here from 0.01f to 0.0001f so the mouse is fully responsive at very low movement speeds
+        private const float _threshold = 0.0001f;
 
 		private bool IsCurrentDeviceMouse
 		{
