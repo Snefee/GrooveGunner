@@ -1,18 +1,32 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class EnemyHitDetection : MonoBehaviour
 {
+    public EnemySpawner countEnemy;
     public int currentHealth = 100;
+    private bool isDead = false;
 
     public void Damage(int damageAmount)
     {
+        if (isDead == true) return;
+
         currentHealth -= damageAmount;
 
         if (currentHealth <= 0)
-
         {
-            gameObject.SetActive(false);
+            isDead = true;
 
+            if (countEnemy != null)
+            {
+                countEnemy.EnemyDefeated();
+            }
+            else
+            {
+                Debug.LogWarning("Enemy was not linked to a spawner. Count may be inaccurate.", this.gameObject);
+            }
+
+            gameObject.SetActive(false);
         }
     }
 }
