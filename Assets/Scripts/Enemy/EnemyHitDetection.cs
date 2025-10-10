@@ -5,6 +5,7 @@ public class EnemyHitDetection : MonoBehaviour
 {
     public EnemySpawner countEnemy;
     public int currentHealth = 100;
+    [HideInInspector] public static int bodykills;
     private bool isDead = false;
 
     public void Damage(int damageAmount)
@@ -16,6 +17,9 @@ public class EnemyHitDetection : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
+            Debug.Log("Enemy defeated!", this.gameObject);
+            bodykills++;
+            Debug.Log("Total Bodyshot kills: " + bodykills);
 
             if (countEnemy != null)
             {

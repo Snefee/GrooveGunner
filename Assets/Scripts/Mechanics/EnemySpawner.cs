@@ -5,7 +5,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawning Configuration")]
     public GameObject enemyPrefab;
     public int maxEnemies = 10;
-    public float spawnInterval = 2.0f; // Time in seconds between each spawn check
+    public float spawnInterval = 2.0f;
 
     [Header("Spawn Locations")]
     public Transform[] spawnPoints;
@@ -14,10 +14,9 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        // Count any enemies that were placed in the scene manually
+        EnemyHitDetection.bodykills = 0;
+        EnemyHitDetectionHeadshot.headshots = 0;
         currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-
-        // Start the spawning process
         InvokeRepeating(nameof(TrySpawnEnemy), spawnInterval, spawnInterval);
     }
 
