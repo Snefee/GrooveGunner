@@ -6,7 +6,8 @@ public class EnemyHitDetectionHeadshot : MonoBehaviour
     [HideInInspector] public static int headshots;
     public void Headshot()
     {
-        mainHealth.Damage(mainHealth.currentHealth);
+        mainHealth.Damage(mainHealth.currentHealth, true); 
+        
         Debug.Log("Headshot!");
         headshots++;
         Debug.Log("Total Headshots: " + headshots);

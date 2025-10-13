@@ -8,7 +8,7 @@ public class EnemyHitDetection : MonoBehaviour
     [HideInInspector] public static int bodykills;
     private bool isDead = false;
 
-    public void Damage(int damageAmount)
+    public void Damage(int damageAmount, bool isHeadshot = false)
     {
         if (isDead == true) return;
 
@@ -18,8 +18,13 @@ public class EnemyHitDetection : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Enemy defeated!", this.gameObject);
-            bodykills++;
-            Debug.Log("Total Bodyshot kills: " + bodykills);
+
+            // Only increment bodykills if it was NOT a headshot
+            if (!isHeadshot)
+            {
+                bodykills++;
+                Debug.Log("Total Bodyshot kills: " + bodykills);
+            }
 
             if (countEnemy != null)
             {
