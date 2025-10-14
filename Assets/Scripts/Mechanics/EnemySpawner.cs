@@ -10,6 +10,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawn Locations")]
     public Transform[] spawnPoints;
 
+    [Header("Facing Target")]
+    public Transform playerTransform;
+
     private int currentEnemyCount;
 
     void Start()
@@ -18,6 +21,11 @@ public class EnemySpawner : MonoBehaviour
         EnemyHitDetectionHeadshot.headshots = 0;
         currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         InvokeRepeating(nameof(TrySpawnEnemy), spawnInterval, spawnInterval);
+
+        if (playerTransform == null)
+        {
+            Debug.LogError("Player Transform is not assigned in the EnemySpawner! Enemies will not face the player.", this);
+        }
     }
 
     void TrySpawnEnemy()
@@ -30,20 +38,24 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (enemyPrefab == null)
+        if (enemyPrefab == null || playerTransform == null)
         {
-            Debug.LogError("Enemy Prefab is not assigned in the EnemySpawner!");
             return;
         }
         if (spawnPoints.Length == 0)
         {
-            Debug.LogError("No spawn points assigned in the EnemySpawner!");
+            Debug.LogWarning("No spawn points assigned in EnemySpawner!");
             return;
         }
 
         Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        GameObject newEnemy = Instantiate(enemyPrefab, randomSpawnPoint.position, randomSpawnPoint.rotation);
+        // --- Rotation Logic ---
+        Vector3 directionToPlayer = playerTransform.position - randomSpawnPoint.position;
+        directionToPlayer.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+
+        GameObject newEnemy = Instantiate(enemyPrefab, randomSpawnPoint.position, lookRotation);
 
         EnemyHitDetection enemyHealth = newEnemy.GetComponent<EnemyHitDetection>();
         if (enemyHealth != null)

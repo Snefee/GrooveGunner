@@ -19,7 +19,6 @@ public class EnemyHitDetection : MonoBehaviour
             isDead = true;
             Debug.Log("Enemy defeated!", this.gameObject);
 
-            // Only increment bodykills if it was NOT a headshot
             if (!isHeadshot)
             {
                 bodykills++;
