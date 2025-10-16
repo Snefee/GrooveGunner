@@ -11,7 +11,7 @@ public class GunFire : MonoBehaviour
     public float weaponRange = 100f;
     public Camera fpsCam;
 
-    private Animator AssaultRifleFire;
+    private Animator Anim_AssaultRifleFire;
     private WaitForSeconds shotDuration = new WaitForSeconds(0.01f);
     private AudioSource gunFire;
     private LineRenderer laserLine;
@@ -23,7 +23,7 @@ public class GunFire : MonoBehaviour
     {
         attackAction = InputSystem.actions.FindAction("Attack");
 
-        AssaultRifleFire = GetComponent<Animator>();
+        Anim_AssaultRifleFire = GetComponent<Animator>();
         laserLine = GetComponent<LineRenderer>();
         gunFire = GetComponent<AudioSource>();
     }
@@ -68,7 +68,7 @@ public class GunFire : MonoBehaviour
     IEnumerator ShotEffect()
     {
         gunFire.Play();
-        AssaultRifleFire.Play("AssaultRifleFire");
+        Anim_AssaultRifleFire.SetTrigger("Fire");
         laserLine.enabled = true;
         yield return shotDuration;
 
