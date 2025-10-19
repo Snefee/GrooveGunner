@@ -10,8 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawn Locations")]
     public Transform[] spawnPoints;
 
-    [Header("Facing Target")]
-    public Transform playerTransform;
+    [Header("Target")]
+    public Transform playerTransform; // Reference to the player
 
     private int currentEnemyCount;
 
@@ -56,6 +56,12 @@ public class EnemySpawner : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
 
         GameObject newEnemy = Instantiate(enemyPrefab, randomSpawnPoint.position, lookRotation);
+
+        EnemyAI enemyAI = newEnemy.GetComponent<EnemyAI>();
+        if (enemyAI != null)
+        {
+            enemyAI.playerTransform = this.playerTransform;
+        }
 
         EnemyHitDetection enemyHealth = newEnemy.GetComponent<EnemyHitDetection>();
         if (enemyHealth != null)

@@ -178,7 +178,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2108330347}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
 --- !u!4 &188645343 stripped
 Transform:
@@ -533,6 +536,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 631200601194940616, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
   m_PrefabInstance: {fileID: 2141518327}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &477863084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+  m_PrefabInstance: {fileID: 2141518327}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &477863087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477863084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 1489721811}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1 &482511275
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +811,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1529560184}
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+--- !u!1 &674343937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+  m_PrefabInstance: {fileID: 133394563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &698438782
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 698438783}
+  - component: {fileID: 698438784}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -820,6 +849,21 @@ Transform:
   - {fileID: 2114104524}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &698438784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698438782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 0}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1 &732091780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,6 +1343,26 @@ Transform:
   - {fileID: 482511276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1209822956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+  m_PrefabInstance: {fileID: 1509081292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1209822959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209822956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 1489721811}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1 &1213315410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1761,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1209822959}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
 --- !u!1 &1529560183
 GameObject:
@@ -1737,6 +1804,26 @@ Transform:
   - {fileID: 235058641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1534949218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+  m_PrefabInstance: {fileID: 1805619147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1534949221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534949218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 1489721811}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1001 &1731697362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1928,7 +2015,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1946749172}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
 --- !u!1 &1770234970
 GameObject:
@@ -2171,7 +2261,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1534949221}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
 --- !u!1001 &1814609683
 PrefabInstance:
@@ -2253,6 +2346,31 @@ PrefabInstance:
       addedObject: {fileID: 215241268}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+--- !u!1 &1904747275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+  m_PrefabInstance: {fileID: 1958331118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1946749169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+  m_PrefabInstance: {fileID: 1758642207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1946749172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946749169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 1489721811}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1001 &1958331118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2312,13 +2430,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1979239360}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
 --- !u!4 &1979239357 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 631200601194940616, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
   m_PrefabInstance: {fileID: 1958331118}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1979239360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904747275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 1489721811}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1 &2058680759 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 33269b2b610f4c245a712795c1927939, type: 3}
@@ -2660,6 +2796,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 631200601194940616, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
   m_PrefabInstance: {fileID: 133394563}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2108330347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674343937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a5f236e2d62db4fac33b4e3d6185fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  playerTransform: {fileID: 1489721811}
+  moveSpeed: 3
+  stoppingDistance: 2.5
 --- !u!1 &2114104522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2924,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 254920906983117426, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 477863087}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dab93a0a8d024e9819b4aa17439de, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
