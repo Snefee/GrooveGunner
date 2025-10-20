@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))] // Ensures a CharacterController is on the GameObject
 public class EnemyAI : MonoBehaviour
 {
     [Header("AI Configuration")]
@@ -8,10 +9,12 @@ public class EnemyAI : MonoBehaviour
     public float stoppingDistance = 2.5f;
 
     private Animator animator;
+    private CharacterController characterController;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>(); // Get the CharacterController component
     }
 
     void Update()
@@ -28,11 +31,12 @@ public class EnemyAI : MonoBehaviour
 
         if (distance > stoppingDistance)
         {
-            Vector3 targetPosition = new Vector3(playerTransform.position.x, 
-                                                 transform.position.y, 
-                                                 playerTransform.position.z);
+            // Calculate the direction to move in, ignoring the Y axis.
+            Vector3 moveDirection = (playerTransform.position - transform.position).normalized;
+            moveDirection.y = 0;
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            // Use CharacterController.Move to handle movement and collisions.
+            characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
             
             if (animator != null)
             {
