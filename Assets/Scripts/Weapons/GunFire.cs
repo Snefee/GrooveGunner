@@ -10,6 +10,7 @@ public class GunFire : MonoBehaviour
     public Transform gunEnd;
     public float weaponRange = 100f;
     public Camera fpsCam;
+    public LayerMask shootableLayers;
 
     private Animator Anim_AssaultRifleFire;
     private WaitForSeconds shotDuration = new WaitForSeconds(0.01f);
@@ -40,7 +41,7 @@ public class GunFire : MonoBehaviour
             RaycastHit hit;
 
             laserLine.SetPosition(0, gunEnd.position);
-            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
+            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange, shootableLayers))
             {
                 laserLine.SetPosition(1, hit.point);
 
