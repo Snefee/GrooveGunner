@@ -232,6 +232,11 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   moveSpeed: 3
   stoppingDistance: 2.5
+  enemyRenderer: {fileID: 6125212060558856132}
+  farColor: {r: 1, g: 0, b: 0, a: 1}
+  nearColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColorDistance: 20
+  minColorDistance: 10
 --- !u!143 &7713465136103051612
 CharacterController:
   m_ObjectHideFlags: 0
@@ -452,6 +457,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18741672, y: 0.46560702, z: 0.19534494}
   m_Center: {x: 0.009201021, y: 0.2006929, z: 0.0024649862}
+--- !u!137 &6125212060558856132 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2717395650310496025, guid: d9cd8eb4a074cd84ab2686c58bcf21d9, type: 3}
+  m_PrefabInstance: {fileID: 1101342208310751011}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6488956042186102248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3078870306507375925, guid: d9cd8eb4a074cd84ab2686c58bcf21d9, type: 3}
