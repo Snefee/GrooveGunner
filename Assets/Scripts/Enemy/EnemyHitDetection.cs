@@ -23,6 +23,8 @@ public class EnemyHitDetection : MonoBehaviour
             {
                 bodykills++;
                 Debug.Log("Total Bodyshot kills: " + bodykills);
+                
+                PointsSystem.instance.AddPoints(PointsSystem.instance.bodyshotPoints);
             }
 
             if (countEnemy != null)
