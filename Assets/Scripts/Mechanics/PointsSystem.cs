@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PointsSystem : MonoBehaviour
 {
@@ -16,23 +17,37 @@ public class PointsSystem : MonoBehaviour
         }
     }
 
-    // Point value configuration
     [Header("Point Configuration")]
     public int bodyshotPoints = 1;
     public int headshotPoints = 2;
 
+    [Header("UI")]
+    [Tooltip("The TextMeshPro UI element that displays the points.")]
+    public TextMeshProUGUI pointsText;
 
     public int totalPoints { get; private set; }
 
     void Start()
     {
         totalPoints = 0;
-        Debug.Log("Total points: " + totalPoints);
+        UpdatePointsUI();
     }
 
     public void AddPoints(int amount)
     {
         totalPoints += amount;
-        Debug.Log($"Added {amount} points. New total: {totalPoints}");
+        UpdatePointsUI();
+    }
+
+    private void UpdatePointsUI()
+    {
+        if (pointsText != null)
+        {
+            pointsText.text = "Points: " + totalPoints;
+        }
+        else
+        {
+            Debug.Log($"Added {totalPoints} points. New total: {totalPoints}");
+        }
     }
 }
