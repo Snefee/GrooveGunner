@@ -35,6 +35,8 @@ public class GunFire : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
 
+            PointsSystem.instance.RegisterShotFired();
+
             StartCoroutine(ShotEffect());
 
             Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
@@ -44,6 +46,8 @@ public class GunFire : MonoBehaviour
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange, shootableLayers))
             {
                 laserLine.SetPosition(1, hit.point);
+
+                PointsSystem.instance.RegisterShotHit();
 
                 EnemyHitDetectionHeadshot headshot = hit.collider.GetComponent<EnemyHitDetectionHeadshot>();
                 if (headshot != null)

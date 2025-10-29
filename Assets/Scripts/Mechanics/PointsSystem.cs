@@ -24,13 +24,22 @@ public class PointsSystem : MonoBehaviour
     [Header("UI")]
     [Tooltip("The TextMeshPro UI element that displays the points.")]
     public TextMeshProUGUI pointsText;
+    [Tooltip("The TextMeshPro UI element that displays the accuracy.")]
+    public TextMeshProUGUI accuracyText;
 
+    // --- Stats ---
     public int totalPoints { get; private set; }
+    public int totalShotsFired { get; private set; }
+    public int totalShotsHit { get; private set; }
+    public float accuracy => (totalShotsFired > 0) ? ((float)totalShotsHit / totalShotsFired) * 100f : 0f;
 
     void Start()
     {
         totalPoints = 0;
+        totalShotsFired = 0;
+        totalShotsHit = 0;
         UpdatePointsUI();
+        UpdateAccuracyUI();
     }
 
     public void AddPoints(int amount)
@@ -39,15 +48,31 @@ public class PointsSystem : MonoBehaviour
         UpdatePointsUI();
     }
 
+    public void RegisterShotFired()
+    {
+        totalShotsFired++;
+        UpdateAccuracyUI();
+    }
+
+    public void RegisterShotHit()
+    {
+        totalShotsHit++;
+        UpdateAccuracyUI();
+    }
+
     private void UpdatePointsUI()
     {
         if (pointsText != null)
         {
             pointsText.text = "Points: " + totalPoints;
         }
-        else
+    }
+
+    private void UpdateAccuracyUI()
+    {
+        if (accuracyText != null)
         {
-            Debug.Log($"Added {totalPoints} points. New total: {totalPoints}");
+            accuracyText.text = $"Accuracy: {accuracy:F1}%";
         }
     }
 }
