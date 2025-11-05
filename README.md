@@ -12,7 +12,7 @@ Current progress: <br>
 - ❌ Heatmap of enemy parts of body where the player has hit through the whole level
 - ❌ Enemy walking / running animations
 - ❌ Enemies synchronized with music
-- ❌ Beggining and end card of a level
+- ❌ Beginning and end card of a level
 - ❌ Sample map / level created
 - ❌ Online per-map ranking system
 - ❌ Public level editor for custom maps
