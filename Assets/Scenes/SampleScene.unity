@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 17490517}
   - component: {fileID: 17490516}
   m_Layer: 5
-  m_Name: Hand_L_Mask
+  m_Name: Arm_L_Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 73840951}
   - component: {fileID: 73840950}
   m_Layer: 5
-  m_Name: Hand_R_Fill
+  m_Name: Arm_R_Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 336172280}
   - component: {fileID: 336172279}
   m_Layer: 5
-  m_Name: Hand_R_Mask
+  m_Name: Arm_R_Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 414296430}
   - component: {fileID: 414296429}
   m_Layer: 5
-  m_Name: Hand_L_Percentage
+  m_Name: Arm_L_Percentage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1969,7 +1969,7 @@ GameObject:
   - component: {fileID: 815022704}
   - component: {fileID: 815022703}
   m_Layer: 5
-  m_Name: Hand_L_Fill
+  m_Name: Arm_L_Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2621,7 +2621,7 @@ GameObject:
   - component: {fileID: 1055055336}
   - component: {fileID: 1055055335}
   m_Layer: 5
-  m_Name: Hand_R_Percentage
+  m_Name: Arm_R_Percentage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
