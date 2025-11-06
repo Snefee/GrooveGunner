@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +22,6 @@ public class GunFire : MonoBehaviour
     private void Start()
     {
         attackAction = InputSystem.actions.FindAction("Attack");
-
         Anim_AssaultRifleFire = GetComponent<Animator>();
         laserLine = GetComponent<LineRenderer>();
         gunFire = GetComponent<AudioSource>();
@@ -34,9 +32,7 @@ public class GunFire : MonoBehaviour
         if(attackAction.IsPressed() && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-
             PointsSystem.instance.RegisterShotFired();
-
             StartCoroutine(ShotEffect());
 
             Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
@@ -47,7 +43,18 @@ public class GunFire : MonoBehaviour
             {
                 laserLine.SetPosition(1, hit.point);
 
-                PointsSystem.instance.RegisterShotHit();
+                Hitbox hitbox = hit.collider.GetComponent<Hitbox>();
+                if (hitbox != null)
+                {
+                    // --- DIAGNOSTIC LOG ---
+                    Debug.Log("Hit registered on body part: " + hitbox.bodyPart);
+                    PointsSystem.instance.RegisterHit(hitbox.bodyPart);
+                }
+                else
+                {
+                    // --- DIAGNOSTIC LOG ---
+                    Debug.LogWarning("Hit detected, but no Hitbox component was found on the collider: " + hit.collider.name, hit.collider);
+                }
 
                 EnemyHitDetectionHeadshot headshot = hit.collider.GetComponent<EnemyHitDetectionHeadshot>();
                 if (headshot != null)
@@ -76,7 +83,6 @@ public class GunFire : MonoBehaviour
         Anim_AssaultRifleFire.SetTrigger("Fire");
         laserLine.enabled = true;
         yield return shotDuration;
-
         laserLine.enabled = false;
     }
 }

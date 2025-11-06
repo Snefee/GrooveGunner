@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class PointsSystem : MonoBehaviour
 {
@@ -22,10 +23,9 @@ public class PointsSystem : MonoBehaviour
     public int headshotPoints = 2;
 
     [Header("UI")]
-    [Tooltip("The TextMeshPro UI element that displays the points.")]
     public TextMeshProUGUI pointsText;
-    [Tooltip("The TextMeshPro UI element that displays the accuracy.")]
     public TextMeshProUGUI accuracyText;
+    public HitHeatmap hitHeatmap;
 
     // --- Stats ---
     public int totalPoints { get; private set; }
@@ -33,13 +33,22 @@ public class PointsSystem : MonoBehaviour
     public int totalShotsHit { get; private set; }
     public float accuracy => (totalShotsFired > 0) ? ((float)totalShotsHit / totalShotsFired) * 100f : 0f;
 
+    public Dictionary<BodyPart, int> bodyPartHits { get; private set; } = new Dictionary<BodyPart, int>();
+
     void Start()
     {
         totalPoints = 0;
         totalShotsFired = 0;
         totalShotsHit = 0;
+
+        foreach (BodyPart bp in System.Enum.GetValues(typeof(BodyPart)))
+        {
+            bodyPartHits[bp] = 0;
+        }
+
         UpdatePointsUI();
         UpdateAccuracyUI();
+        if (hitHeatmap != null) hitHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
     }
 
     public void AddPoints(int amount)
@@ -54,25 +63,25 @@ public class PointsSystem : MonoBehaviour
         UpdateAccuracyUI();
     }
 
-    public void RegisterShotHit()
+    public void RegisterHit(BodyPart bodyPart)
     {
         totalShotsHit++;
+        if (bodyPartHits.ContainsKey(bodyPart))
+        {
+            bodyPartHits[bodyPart]++;
+        }
+        
         UpdateAccuracyUI();
+        if (hitHeatmap != null) hitHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
     }
 
     private void UpdatePointsUI()
     {
-        if (pointsText != null)
-        {
-            pointsText.text = "Points: " + totalPoints;
-        }
+        if (pointsText != null) pointsText.text = "Points: " + totalPoints;
     }
 
     private void UpdateAccuracyUI()
     {
-        if (accuracyText != null)
-        {
-            accuracyText.text = $"Accuracy: {accuracy:F1}%";
-        }
+        if (accuracyText != null) accuracyText.text = $"Accuracy: {accuracy:F1}%";
     }
 }
