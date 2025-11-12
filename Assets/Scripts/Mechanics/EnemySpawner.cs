@@ -11,21 +11,40 @@ public class EnemySpawner : MonoBehaviour
     public Transform[] spawnPoints;
 
     [Header("Target")]
-    public Transform playerTransform; // Reference to the player
+    public Transform playerTransform;
 
     private int currentEnemyCount;
+    private bool isSpawning = false;
 
     void Start()
     {
         EnemyHitDetection.bodykills = 0;
         EnemyHitDetectionHeadshot.headshots = 0;
+
         currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        InvokeRepeating(nameof(TrySpawnEnemy), spawnInterval, spawnInterval);
 
         if (playerTransform == null)
         {
             Debug.LogError("Player Transform is not assigned in the EnemySpawner! Enemies will not face the player.", this);
         }
+    }
+
+    public void StartSpawning()
+    {
+        if (isSpawning) return;
+
+        Debug.Log("Enemy Spawner has started.", this);
+        isSpawning = true;
+        InvokeRepeating(nameof(TrySpawnEnemy), 0f, spawnInterval);
+    }
+
+    public void StopSpawning()
+    {
+        if (!isSpawning) return;
+
+        Debug.Log("Enemy Spawner has stopped.", this);
+        isSpawning = false;
+        CancelInvoke(nameof(TrySpawnEnemy));
     }
 
     void TrySpawnEnemy()
@@ -42,9 +61,10 @@ public class EnemySpawner : MonoBehaviour
         {
             return;
         }
+
         if (spawnPoints.Length == 0)
         {
-            Debug.LogWarning("No spawn points assigned in EnemySpawner!");
+            Debug.LogWarning("No spawn points assigned in EnemySpawner!", this);
             return;
         }
 
