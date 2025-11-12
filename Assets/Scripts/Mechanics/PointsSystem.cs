@@ -25,7 +25,8 @@ public class PointsSystem : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI accuracyText;
-    public HitHeatmap hitHeatmap;
+    [Tooltip("The heatmap UI that is visible during gameplay.")]
+    public HitHeatmap gameplayHeatmap;
 
     // --- Stats ---
     public int totalPoints { get; private set; }
@@ -48,7 +49,7 @@ public class PointsSystem : MonoBehaviour
 
         UpdatePointsUI();
         UpdateAccuracyUI();
-        if (hitHeatmap != null) hitHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
+        if (gameplayHeatmap != null) gameplayHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
     }
 
     public void AddPoints(int amount)
@@ -72,7 +73,7 @@ public class PointsSystem : MonoBehaviour
         }
         
         UpdateAccuracyUI();
-        if (hitHeatmap != null) hitHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
+        if (gameplayHeatmap != null) gameplayHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
     }
 
     private void UpdatePointsUI()

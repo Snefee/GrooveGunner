@@ -25,19 +25,29 @@ public class DEBUG_LevelControls : MonoBehaviour
     public EnemySpawner enemySpawner;
     [Tooltip("The UI panel to show when the level is finished.")]
     public GameObject levelEndCard;
+    [Tooltip("The heatmap UI that is part of the Level End Card.")]
+    public HitHeatmap endCardHeatmap;
 
     void Start()
     {
         currentState = LevelState.NotStarted;
+
         if (enemySpawner == null)
         {
             Debug.LogError("Enemy Spawner is not assigned in the Level Controls!", this);
         }
+
         if (levelEndCard == null)
         {
             Debug.LogError("Level End Card is not assigned in the Level Controls!", this);
         }
-        else
+
+        if (endCardHeatmap == null)
+        {
+            Debug.LogError("End Card Heatmap is not assigned in the Level Controls!", this);
+        }
+        
+        if (levelEndCard != null)
         {
             levelEndCard.SetActive(false);
         }
@@ -83,6 +93,11 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (enemySpawner != null)
         {
             enemySpawner.StopSpawning();
+        }
+
+        if (endCardHeatmap != null)
+        {
+            endCardHeatmap.UpdateHeatmap(PointsSystem.instance.bodyPartHits, PointsSystem.instance.totalShotsHit);
         }
 
         if (levelEndCard != null)
