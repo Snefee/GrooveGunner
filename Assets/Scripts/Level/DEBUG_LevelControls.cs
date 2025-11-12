@@ -23,6 +23,8 @@ public class DEBUG_LevelControls : MonoBehaviour
     [Header("Dependencies")]
     [Tooltip("The EnemySpawner to control during the level.")]
     public EnemySpawner enemySpawner;
+    [Tooltip("The UI panel to show when the level is finished.")]
+    public GameObject levelEndCard;
 
     void Start()
     {
@@ -30,6 +32,14 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (enemySpawner == null)
         {
             Debug.LogError("Enemy Spawner is not assigned in the Level Controls!", this);
+        }
+        if (levelEndCard == null)
+        {
+            Debug.LogError("Level End Card is not assigned in the Level Controls!", this);
+        }
+        else
+        {
+            levelEndCard.SetActive(false);
         }
     }
 
@@ -55,6 +65,10 @@ public class DEBUG_LevelControls : MonoBehaviour
         Debug.Log("LEVEL STARTED");
         currentState = LevelState.InProgress;
 
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         if (enemySpawner != null)
         {
             enemySpawner.StartSpawning();
@@ -70,5 +84,14 @@ public class DEBUG_LevelControls : MonoBehaviour
         {
             enemySpawner.StopSpawning();
         }
+
+        if (levelEndCard != null)
+        {
+            levelEndCard.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
