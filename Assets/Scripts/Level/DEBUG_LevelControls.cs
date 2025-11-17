@@ -27,6 +27,8 @@ public class DEBUG_LevelControls : MonoBehaviour
     public GameObject levelEndCard;
     [Tooltip("The heatmap UI that is part of the Level End Card.")]
     public HitHeatmap endCardHeatmap;
+    [Tooltip("The PlayerInput component on the player character.")]
+    public PlayerInput playerInput;
 
     void Start()
     {
@@ -46,11 +48,17 @@ public class DEBUG_LevelControls : MonoBehaviour
         {
             Debug.LogError("End Card Heatmap is not assigned in the Level Controls!", this);
         }
+        if (playerInput == null)
+        {
+            Debug.LogError("Player Input is not assigned in the Level Controls!", this);
+        }
         
         if (levelEndCard != null)
         {
             levelEndCard.SetActive(false);
         }
+
+        if (playerInput != null) playerInput.enabled = false;
     }
 
     void Update()
@@ -75,6 +83,8 @@ public class DEBUG_LevelControls : MonoBehaviour
         Debug.Log("LEVEL STARTED");
         currentState = LevelState.InProgress;
 
+        if (playerInput != null) playerInput.enabled = true;
+
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -89,6 +99,8 @@ public class DEBUG_LevelControls : MonoBehaviour
     {
         Debug.Log("LEVEL FINISHED");
         currentState = LevelState.Finished;
+
+        if (playerInput != null) playerInput.enabled = false;
 
         if (enemySpawner != null)
         {

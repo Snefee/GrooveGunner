@@ -29,6 +29,11 @@ public class GunFire : MonoBehaviour
 
     void Update()
     {
+        if (DEBUG_LevelControls.instance.currentState != DEBUG_LevelControls.LevelState.InProgress)
+        {
+            return;
+        }
+
         if(attackAction.IsPressed() && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
