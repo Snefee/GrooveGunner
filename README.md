@@ -7,9 +7,9 @@ Current progress: <br>
 - ✅ Enemies with AI tracking the player while avoiding obstacles
 - ✅ Enemy to player distance detection which controls the enemy colors
 - ✅ Accuracy and points based on hit location
+- ✅ Heatmap of enemy parts of body where the player has hit through the whole level
 <br>
 
-- ❌ Heatmap of enemy parts of body where the player has hit through the whole level
 - ❌ Enemy walking / running animations
 - ❌ Enemies synchronized with music
 - ❌ Beginning and end card of a level
