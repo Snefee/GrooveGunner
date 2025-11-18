@@ -75,6 +75,8 @@ public class DEBUG_LevelControls : MonoBehaviour
         }
 
         if (playerInput != null) playerInput.enabled = false;
+
+        PointsSystem.instance.SetGameplayUIVisibility(false);
     }
 
     void Update()
@@ -109,6 +111,8 @@ public class DEBUG_LevelControls : MonoBehaviour
         {
             enemySpawner.StartSpawning();
         }
+
+        PointsSystem.instance.SetGameplayUIVisibility(true);
     }
 
     public void FinishLevel()
@@ -122,6 +126,8 @@ public class DEBUG_LevelControls : MonoBehaviour
         {
             enemySpawner.StopSpawning();
         }
+
+        PointsSystem.instance.SetGameplayUIVisibility(false);
 
         if (endCardHeatmap != null)
         {

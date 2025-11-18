@@ -23,6 +23,8 @@ public class PointsSystem : MonoBehaviour
     public int headshotPoints = 2;
 
     [Header("Gameplay UI")]
+    [Tooltip("The parent GameObject for all gameplay UI elements.")]
+    public GameObject gameplayUIParent;
     [Tooltip("Displays the points during gameplay.")]
     public TextMeshProUGUI gameplayPointsText;
     [Tooltip("Displays the accuracy during gameplay.")]
@@ -76,6 +78,13 @@ public class PointsSystem : MonoBehaviour
         
         UpdateAccuracyUI();
         if (gameplayHeatmap != null) gameplayHeatmap.UpdateHeatmap(bodyPartHits, totalShotsHit);
+    }
+    public void SetGameplayUIVisibility(bool isVisible)
+    {
+        if (gameplayUIParent != null)
+        {
+            gameplayUIParent.SetActive(isVisible);
+        }
     }
 
     private void UpdatePointsUI()
