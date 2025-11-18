@@ -22,9 +22,11 @@ public class PointsSystem : MonoBehaviour
     public int bodyshotPoints = 1;
     public int headshotPoints = 2;
 
-    [Header("UI")]
-    public TextMeshProUGUI pointsText;
-    public TextMeshProUGUI accuracyText;
+    [Header("Gameplay UI")]
+    [Tooltip("Displays the points during gameplay.")]
+    public TextMeshProUGUI gameplayPointsText;
+    [Tooltip("Displays the accuracy during gameplay.")]
+    public TextMeshProUGUI gameplayAccuracyText;
     [Tooltip("The heatmap UI that is visible during gameplay.")]
     public HitHeatmap gameplayHeatmap;
 
@@ -78,11 +80,11 @@ public class PointsSystem : MonoBehaviour
 
     private void UpdatePointsUI()
     {
-        if (pointsText != null) pointsText.text = "Points: " + totalPoints;
+        if (gameplayPointsText != null) gameplayPointsText.text = "Points: " + totalPoints;
     }
 
     private void UpdateAccuracyUI()
     {
-        if (accuracyText != null) accuracyText.text = $"Accuracy: {accuracy:F1}%";
+        if (gameplayAccuracyText != null) gameplayAccuracyText.text = $"Accuracy: {accuracy:F1}%";
     }
 }

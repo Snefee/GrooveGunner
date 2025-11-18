@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class DEBUG_LevelControls : MonoBehaviour
 {
@@ -30,6 +31,13 @@ public class DEBUG_LevelControls : MonoBehaviour
     [Tooltip("The PlayerInput component on the player character.")]
     public PlayerInput playerInput;
 
+    [Header("End Card UI")]
+    [Tooltip("The TextMeshPro UI element on the end card for displaying final points.")]
+    public TextMeshProUGUI endCardPointsText;
+    [Tooltip("The TextMeshPro UI element on the end card for displaying final accuracy.")]
+    public TextMeshProUGUI endCardAccuracyText;
+
+
     void Start()
     {
         currentState = LevelState.NotStarted;
@@ -51,6 +59,14 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (playerInput == null)
         {
             Debug.LogError("Player Input is not assigned in the Level Controls!", this);
+        }
+        if (endCardPointsText == null)
+        {
+            Debug.LogError("End Card Points Text is not assigned in the Level Controls!", this);
+        }
+        if (endCardAccuracyText == null)
+        {
+            Debug.LogError("End Card Accuracy Text is not assigned in the Level Controls!", this);
         }
         
         if (levelEndCard != null)
@@ -110,6 +126,15 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (endCardHeatmap != null)
         {
             endCardHeatmap.UpdateHeatmap(PointsSystem.instance.bodyPartHits, PointsSystem.instance.totalShotsHit);
+        }
+
+        if (endCardPointsText != null)
+        {
+            endCardPointsText.text = "Total Points: " + PointsSystem.instance.totalPoints;
+        }
+        if (endCardAccuracyText != null)
+        {
+            endCardAccuracyText.text = $"Final Accuracy: {PointsSystem.instance.accuracy:F1}%";
         }
 
         if (levelEndCard != null)
