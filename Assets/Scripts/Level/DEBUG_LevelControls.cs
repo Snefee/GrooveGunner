@@ -6,6 +6,8 @@ public class DEBUG_LevelControls : MonoBehaviour
 {
     public static DEBUG_LevelControls instance;
 
+    InputAction pauseAction;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -18,7 +20,7 @@ public class DEBUG_LevelControls : MonoBehaviour
         }
     }
 
-    public enum LevelState { NotStarted, InProgress, Finished }
+    public enum LevelState { NotStarted, InProgress, Paused, Finished }
     public LevelState currentState { get; private set; }
 
     [Header("Dependencies")]
@@ -26,8 +28,8 @@ public class DEBUG_LevelControls : MonoBehaviour
     public EnemySpawner enemySpawner;
     [Tooltip("The UI panel to show when the level is finished.")]
     public GameObject levelEndCard;
-    [Tooltip("The heatmap UI that is part of the Level End Card.")]
-    public HitHeatmap endCardHeatmap;
+    [Tooltip("The UI panel for the pause menu.")]
+    public GameObject pauseMenu;
     [Tooltip("The PlayerInput component on the player character.")]
     public PlayerInput playerInput;
 
@@ -36,11 +38,15 @@ public class DEBUG_LevelControls : MonoBehaviour
     public TextMeshProUGUI endCardPointsText;
     [Tooltip("The TextMeshPro UI element on the end card for displaying final accuracy.")]
     public TextMeshProUGUI endCardAccuracyText;
+    [Tooltip("The heatmap UI that is part of the Level End Card.")]
+    public HitHeatmap endCardHeatmap;
 
 
     void Start()
     {
         currentState = LevelState.NotStarted;
+
+        pauseAction = InputSystem.actions.FindAction("Pause");
 
         if (enemySpawner == null)
         {
@@ -51,7 +57,10 @@ public class DEBUG_LevelControls : MonoBehaviour
         {
             Debug.LogError("Level End Card is not assigned in the Level Controls!", this);
         }
-
+        if (pauseMenu == null)
+        {
+            Debug.LogError("Pause Menu is not assigned in the Level Controls!", this);
+        }
         if (endCardHeatmap == null)
         {
             Debug.LogError("End Card Heatmap is not assigned in the Level Controls!", this);
@@ -73,6 +82,10 @@ public class DEBUG_LevelControls : MonoBehaviour
         {
             levelEndCard.SetActive(false);
         }
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false);
+        }
 
         if (playerInput != null) playerInput.enabled = false;
 
@@ -93,6 +106,19 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (Keyboard.current.lKey.wasPressedThisFrame && currentState == LevelState.InProgress)
         {
             FinishLevel();
+        }
+
+        // Toggle pause
+        if (pauseAction.WasPressedThisFrame())
+        {
+            if (currentState == LevelState.InProgress)
+            {
+                PauseGame();
+            }
+            else if (currentState == LevelState.Paused)
+            {
+                ResumeGame();
+            }
         }
     }
 
@@ -151,5 +177,31 @@ public class DEBUG_LevelControls : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    void PauseGame()
+    {
+        Debug.Log("GAME PAUSED");
+        currentState = LevelState.Paused;
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (playerInput != null) playerInput.enabled = false;
+
+        if (pauseMenu != null) pauseMenu.SetActive(true);
+    }
+
+    void ResumeGame()
+    {
+        Debug.Log("GAME RESUMED");
+        currentState = LevelState.InProgress;
+
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        if (playerInput != null) playerInput.enabled = true;
+
+        if (pauseMenu != null) pauseMenu.SetActive(false);
     }
 }
