@@ -192,7 +192,7 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (pauseMenu != null) pauseMenu.SetActive(true);
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         Debug.Log("GAME RESUMED");
         currentState = LevelState.InProgress;
