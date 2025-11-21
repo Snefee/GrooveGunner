@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
+using System.Collections;
 
 public class DEBUG_LevelControls : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class DEBUG_LevelControls : MonoBehaviour
         }
     }
 
-    public enum LevelState { NotStarted, InProgress, Paused, Finished }
+    public enum LevelState { NotStarted, InProgress, Paused, Resuming, Finished }
     public LevelState currentState { get; private set; }
 
     [Header("Dependencies")]
@@ -30,8 +32,16 @@ public class DEBUG_LevelControls : MonoBehaviour
     public GameObject levelEndCard;
     [Tooltip("The UI panel for the pause menu.")]
     public GameObject pauseMenu;
+    [Tooltip("The UI panel for the resume countdown.")]
+    public GameObject countdownUI;
     [Tooltip("The PlayerInput component on the player character.")]
     public PlayerInput playerInput;
+
+    [Header("Resume Animation Elements")]
+    [Tooltip("The Image component used for the resume countdown animation.")]
+    public Image resumeCountdownImage;
+    [Tooltip("The TextMeshProUGUI component used for the showing numbers.")]
+    public TextMeshProUGUI resumeCountdownText;
 
     [Header("End Card UI")]
     [Tooltip("The TextMeshPro UI element on the end card for displaying final points.")]
@@ -85,6 +95,10 @@ public class DEBUG_LevelControls : MonoBehaviour
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(false);
+        }
+        if (countdownUI != null)
+        {
+            countdownUI.SetActive(false);
         }
 
         if (playerInput != null) playerInput.enabled = false;
@@ -194,14 +208,49 @@ public class DEBUG_LevelControls : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (currentState == LevelState.Paused)
+        {
+            StartCoroutine(ResumeCountdown());
+        }
+    }
+
+    IEnumerator ResumeCountdown()
+    {
+        Debug.Log("RESUMING...");
+        currentState = LevelState.Resuming;
+
+        if (pauseMenu != null) pauseMenu.SetActive(false);
+        if (countdownUI != null) countdownUI.SetActive(true);
+
+        for (int i = 3; i > 0; i--)
+        {
+            if (resumeCountdownText != null) resumeCountdownText.text = i.ToString();
+            if (resumeCountdownImage != null) resumeCountdownImage.fillAmount = 1f;
+
+            float timer = 0f;
+            float duration = 1f;
+
+            while (timer < duration)
+            {
+                timer += Time.unscaledDeltaTime;
+
+                if (resumeCountdownImage != null)
+                {
+                    resumeCountdownImage.fillAmount = Mathf.Lerp(1f, 0f, timer / duration);
+                }
+
+                yield return null;
+            }
+        }
+
         Debug.Log("GAME RESUMED");
         currentState = LevelState.InProgress;
+
+        if (countdownUI != null) countdownUI.SetActive(false);
 
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         if (playerInput != null) playerInput.enabled = true;
-
-        if (pauseMenu != null) pauseMenu.SetActive(false);
     }
 }
