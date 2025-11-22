@@ -23,5 +23,8 @@ Current progress: <br>
 **Short video showing current state of the game**
 
 
-https://github.com/user-attachments/assets/eabbc699-8ae7-427a-a452-baa970662054
+
+https://github.com/user-attachments/assets/4d853974-3d05-45ce-8c20-6901b4c43eb7
+
+
 
