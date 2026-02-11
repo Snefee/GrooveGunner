@@ -16,6 +16,9 @@ Current progress: <br>
 - ❌ Sample map / level created
 - ❌ Online per-map ranking system
 - ❌ Public level editor for custom maps
+<br>
+
+### Hiatus info: Development was paused to allow me to rethink the core audio-sync mechanics for combat and enemy interactions. During this time, I focused on other projects to reset and gather new ideas.
 
 <br>
 <br>
